@@ -118,7 +118,7 @@
 	contains = list(
 					/obj/item/hardpoint/support/artillery_module)
 	cost = RO_PRICE_NORMAL_PRICY
-	containertype = /obj/structure/closet/crate/supply
+	containertype = /obj/structure/closet/crate/ammo
 	containername = "Artillery Module crate"
 	group = "Vehicle Modules and Ammo"
 
