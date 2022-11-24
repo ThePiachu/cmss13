@@ -66,7 +66,7 @@
 
 //We remove the chems for vending a given bottle
 //If we don't have the chem amount, it's an edge case that would be hard to police (semaphoring chem vendors and dispensers), so we ignore it
-/obj/structure/machinery/chem_storage/proc/remove_chems_for_bottle(var/obj/item/reagent_container/glass/bottle/bottle)
+/obj/structure/machinery/chem_storage/proc/remove_chems_for_vending_bottle(var/obj/item/reagent_container/glass/bottle/bottle)
 	if(!ispath(bottle))
 		return
 	if(!initial(bottle.initial_chem))

@@ -258,7 +258,7 @@
 //If we vend a bottle successfully we should change how many chems we have in the big chem dispenser
 /obj/structure/machinery/cm_vending/sorted/medical/chemistry/vend_succesfully(var/list/L, var/mob/living/carbon/human/H, var/turf/T)
 	if(ispath(L[3], /obj/item/reagent_container/glass/bottle))
-		chem_storage.remove_chems_for_bottle(L[3])
+		chem_storage.remove_chems_for_vending_bottle(L[3])
 	. = ..()
 
 /obj/structure/machinery/cm_vending/sorted/medical/chemistry/proc/recalculate_bottle_amounts()
