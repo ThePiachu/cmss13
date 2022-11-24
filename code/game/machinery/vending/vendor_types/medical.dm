@@ -53,6 +53,9 @@
 		/obj/item/stack/medical/splint
 		)
 
+	var/network = "Ground"
+	var/obj/structure/machinery/chem_storage/chem_storage
+
 /obj/structure/machinery/cm_vending/sorted/medical/Destroy()
 	QDEL_NULL(last_health_display)
 	. = ..()
@@ -246,6 +249,27 @@
 		list("Dropper", round(scale * 3), /obj/item/reagent_container/dropper, VENDOR_ITEM_REGULAR),
 		list("Syringe", round(scale * 7), /obj/item/reagent_container/syringe, VENDOR_ITEM_REGULAR)
 	)
+
+
+/obj/structure/machinery/cm_vending/sorted/medical/chemistry/get_listed_products(var/mob/user)
+	recalculate_bottle_amounts()
+	. = ..()
+
+//If we vend a bottle successfully we should change how many chems we have in the big chem dispenser
+/obj/structure/machinery/cm_vending/sorted/medical/chemistry/vend_succesfully(var/list/L, var/mob/living/carbon/human/H, var/turf/T)
+	if(ispath(L[3], /obj/item/reagent_container/glass/bottle))
+		chem_storage.remove_chems_for_bottle(L[3])
+	. = ..()
+
+/obj/structure/machinery/cm_vending/sorted/medical/chemistry/proc/recalculate_bottle_amounts()
+	if(!chem_storage)
+		chem_storage = chemical_data.connect_chem_storage(network)
+	//We might still not have chem_storage, so best double check
+	if(chem_storage)
+		for(var/list/listed_product as anything in listed_products)
+			if(listed_product && listed_product.len)
+				if(ispath(listed_product[3], /obj/item/reagent_container/glass/bottle))
+					listed_product[2] = chem_storage.how_many_bottles_can_be_filled(listed_product[3])
 
 /obj/structure/machinery/cm_vending/sorted/medical/no_access
 	req_access = list()
