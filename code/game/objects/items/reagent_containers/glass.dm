@@ -46,9 +46,14 @@
 		/obj/structure/machinery/autodispenser,
 		/obj/structure/machinery/constructable_frame)
 
+	var/chemname = null
+
 /obj/item/reagent_container/glass/Initialize()
 	. = ..()
 	base_name = name
+	if(chemname)
+		reagents.add_reagent(chemname, volume)
+		update_icon()
 
 /obj/item/reagent_container/glass/get_examine_text(mob/user)
 	. = ..()
@@ -480,11 +485,7 @@
 	possible_transfer_amounts = list(50,100,200,300,400)
 	volume = 400
 	splashable = FALSE				// you can't spill a canister
-	var/reagent = "hydrogen"
-
-/obj/item/reagent_container/glass/canister/Initialize()
-	. = ..()
-	reagents.add_reagent(reagent, 400)
+	chemname = "hydrogen"
 
 /obj/item/reagent_container/glass/canister/afterattack(obj/target, mob/user , flag)
 	if(!istype(target, /obj/structure/reagent_dispensers))
@@ -495,25 +496,25 @@
 	name = "Ammonia canister"
 	desc = "A canister containing pressurized ammonia. Can be used to refill storage tanks."
 	icon_state = "canister_ammonia"
-	reagent = "ammonia"
+	chemname = "ammonia"
 
 /obj/item/reagent_container/glass/canister/methane
 	name = "Methane canister"
 	desc = "A canister containing pressurized methane. Can be used to refill storage tanks."
 	icon_state = "canister_methane"
-	reagent = "methane"
+	chemname = "methane"
 
 /obj/item/reagent_container/glass/canister/pacid
 	name = "Polytrinic acid canister"
 	desc = "A canister containing pressurized polytrinic acid. Can be used to refill storage tanks."
 	icon_state = "canister_pacid"
-	reagent = "pacid"
+	chemname = "pacid"
 
 /obj/item/reagent_container/glass/canister/oxygen
 	name = "Oxygen canister"
 	desc = "A canister containing pressurized oxygen. Can be used to refill storage tanks."
 	icon_state = "canister_oxygen"
-	reagent = "oxygen"
+	chemname = "oxygen"
 
 /obj/item/reagent_container/glass/pressurized_canister // See the Pressurized Reagent Canister Pouch
 	name = "Pressurized canister"
@@ -623,7 +624,6 @@
 	desc = "It's a large bucket that fits in a janitorial cart. Holds 500 units."
 	icon_state = "janibucket"
 	volume = 500
-
 
 /obj/item/reagent_container/glass/rag
 	name = "damp rag"

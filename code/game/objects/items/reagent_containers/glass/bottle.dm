@@ -11,7 +11,6 @@
 	flags_atom = FPRINT|OPENCONTAINER
 	volume = 60
 	attack_speed = 4
-	var/chemname = null
 
 /obj/item/reagent_container/glass/bottle/on_reagent_change()
 	update_icon()
@@ -32,8 +31,6 @@
 	. = ..()
 	if(!icon_state)
 		icon_state = "bottle-[rand(1.4)]"
-	if(chemname)
-		reagents.add_reagent(chemname, volume)
 
 /obj/item/reagent_container/glass/bottle/update_icon()
 	overlays.Cut()
