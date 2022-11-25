@@ -111,11 +111,17 @@
 			to_chat(user, SPAN_WARNING("[src] makes a warning noise. The [C.name] is currently full."))
 			return
 
-		to_chat(user, SPAN_NOTICE("[src] makes a whirring noise as it refills your [C.name]."))
-		// Since the reagent is deleted on use it's easier to make a new one instead of snowflake checking
-		var/obj/item/reagent_container/new_container = new C.type(src)
-		qdel(C)
-		user.put_in_hands(new_container)
+		var/tmp_volume = C.reagents.total_volume
+
+		chem_storage.refill_container(C)
+
+		if(C.reagents.total_volume == C.reagents.maximum_volume)
+			to_chat(user, SPAN_NOTICE("[src] makes a whirring noise as it refills your [C.name]."))
+		else if(C.reagents.total_volume > tmp_volume)
+			to_chat(user, SPAN_NOTICE("[src] makes a whirring noise as it partially refills your [C.name]."))
+		else
+			to_chat(user, SPAN_WARNING("[src] cannot refill the [C.name] - not enough chemicals in the Chemical Storage System."))
+		
 	else if(stat == WORKING && LAZYLEN(stack_refill) && (istype(I, /obj/item/stack)))
 		if(!hacked)
 			if(!allowed(user))

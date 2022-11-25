@@ -85,7 +85,12 @@
 
 //We refill a stock reagent container from our storage
 /obj/structure/machinery/chem_storage/proc/refill_container(var/obj/item/reagent_container)
-	
+	if(istype(reagent_container, /obj/item/reagent_container/glass))
+		var/obj/item/reagent_container/glass/G = reagent_container
+		if(G.chemname)
+			//We let the /datum/reagents proc handle balancing amounts and all that
+			basic_chemicals.trans_id_to(G, G.chemname, G.volume)
+			custom_chemicals.trans_id_to(G, G.chemname, G.volume)
 
 /obj/structure/machinery/chem_storage/get_examine_text(mob/user)
 	. = ..()
