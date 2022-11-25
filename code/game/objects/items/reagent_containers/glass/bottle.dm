@@ -32,6 +32,8 @@
 	. = ..()
 	if(!icon_state)
 		icon_state = "bottle-[rand(1.4)]"
+	if(chemname)
+		reagents.add_reagent(chemname, volume)
 
 /obj/item/reagent_container/glass/bottle/update_icon()
 	overlays.Cut()
