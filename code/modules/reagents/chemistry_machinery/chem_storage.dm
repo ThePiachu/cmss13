@@ -60,28 +60,32 @@
 /obj/structure/machinery/chem_storage/proc/how_many_bottles_can_be_filled(var/obj/item/reagent_container/glass/bottle/bottle)
 	if(!ispath(bottle))
 		return 0
-	if(!initial(bottle.initial_chem))
+	if(!initial(bottle.chemname))
 		return 0
-	return round((basic_chemicals.get_reagent_amount(initial(bottle.initial_chem)) + custom_chemicals.get_reagent_amount(initial(bottle.initial_chem))) / initial(bottle.volume))
+	return round((basic_chemicals.get_reagent_amount(initial(bottle.chemname)) + custom_chemicals.get_reagent_amount(initial(bottle.chemname))) / initial(bottle.volume))
 
 //We remove the chems for vending a given bottle
 //If we don't have the chem amount, it's an edge case that would be hard to police (semaphoring chem vendors and dispensers), so we ignore it
 /obj/structure/machinery/chem_storage/proc/remove_chems_for_vending_bottle(var/obj/item/reagent_container/glass/bottle/bottle)
 	if(!ispath(bottle))
 		return
-	if(!initial(bottle.initial_chem))
+	if(!initial(bottle.chemname))
 		return
 	var/to_remove = initial(bottle.volume)
-	var/amount = basic_chemicals.get_reagent_amount(initial(bottle.initial_chem))
+	var/amount = basic_chemicals.get_reagent_amount(initial(bottle.chemname))
 	if (amount >= to_remove)
 		amount = to_remove
 	if(amount > 0)
-		basic_chemicals.remove_reagent(initial(bottle.initial_chem), amount, TRUE)
+		basic_chemicals.remove_reagent(initial(bottle.chemname), amount, TRUE)
 		to_remove -= amount
 	if(to_remove > 0)
 		//We still need to remove some chem from the custom chems since we didn't have enough basic chems
-		custom_chemicals.remove_reagent(initial(bottle.initial_chem), amount, TRUE)
+		custom_chemicals.remove_reagent(initial(bottle.chemname), amount, TRUE)
 		//If this isn't enough, we don't care, semaphoring this wouldn't be worth it
+
+//We refill a stock reagent container from our storage
+/obj/structure/machinery/chem_storage/proc/refill_container(var/obj/item/reagent_container)
+	
 
 /obj/structure/machinery/chem_storage/get_examine_text(mob/user)
 	. = ..()

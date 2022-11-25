@@ -11,7 +11,7 @@
 	flags_atom = FPRINT|OPENCONTAINER
 	volume = 60
 	attack_speed = 4
-	var/initial_chem = null
+	var/chemname = null
 
 /obj/item/reagent_container/glass/bottle/on_reagent_change()
 	update_icon()
@@ -30,8 +30,6 @@
 
 /obj/item/reagent_container/glass/bottle/Initialize()
 	. = ..()
-	if(initial_chem)
-		reagents.add_reagent(initial_chem, volume)
 	if(!icon_state)
 		icon_state = "bottle-[rand(1.4)]"
 
@@ -64,7 +62,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle19"
 	amount_per_transfer_from_this = 60
-	initial_chem = "inaprovaline"
+	chemname = "inaprovaline"
 
 /obj/item/reagent_container/glass/bottle/kelotane
 	name = "\improper Kelotane bottle"
@@ -72,7 +70,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle16"
 	amount_per_transfer_from_this = 60
-	initial_chem = "kelotane"
+	chemname = "kelotane"
 
 /obj/item/reagent_container/glass/bottle/dexalin
 	name = "\improper Dexalin bottle"
@@ -80,7 +78,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle10"
 	amount_per_transfer_from_this = 60
-	initial_chem = "dexalin"
+	chemname = "dexalin"
 
 /obj/item/reagent_container/glass/bottle/spaceacillin
 	name = "\improper Spaceacillin bottle"
@@ -88,21 +86,21 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle8"
 	amount_per_transfer_from_this = 60
-	initial_chem = "spaceacillin"
+	chemname = "spaceacillin"
 
 /obj/item/reagent_container/glass/bottle/toxin
 	name = "toxin bottle"
 	desc = "A small bottle of toxins. Do not drink, it is poisonous."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle12"
-	initial_chem = "toxin"
+	chemname = "toxin"
 
 /obj/item/reagent_container/glass/bottle/cyanide
 	name = "cyanide bottle"
 	desc = "A small bottle of cyanide. Bitter almonds?"
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle12"
-	initial_chem = "cyanide"
+	chemname = "cyanide"
 
 /obj/item/reagent_container/glass/bottle/stoxin
 	name = "Soporific bottle"
@@ -110,14 +108,14 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle20"
 	amount_per_transfer_from_this = 60
-	initial_chem = "stoxin"
+	chemname = "stoxin"
 
 /obj/item/reagent_container/glass/bottle/chloralhydrate
 	name = "chloral hydrate bottle"
 	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle20"
-	initial_chem = "chloralhydrate"
+	chemname = "chloralhydrate"
 
 /obj/item/reagent_container/glass/bottle/antitoxin
 	name = "\improper Dylovene bottle"
@@ -125,28 +123,28 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle7"
 	amount_per_transfer_from_this = 60
-	initial_chem = "anti_toxin"
+	chemname = "anti_toxin"
 
 /obj/item/reagent_container/glass/bottle/mutagen
 	name = "unstable mutagen bottle"
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle7"
-	initial_chem = "mutagen"
+	chemname = "mutagen"
 
 /obj/item/reagent_container/glass/bottle/ammonia
 	name = "ammonia bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle20"
-	initial_chem = "ammonia"
+	chemname = "ammonia"
 
 /obj/item/reagent_container/glass/bottle/diethylamine
 	name = "diethylamine bottle"
 	desc = "A small bottle. Contains a potent fertiliser."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle17"
-	initial_chem = "diethylamine"
+	chemname = "diethylamine"
 
 /obj/item/reagent_container/glass/bottle/flu_virion
 	name = "flu virion culture bottle"
@@ -303,28 +301,28 @@
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid, an extremely potent and dangerous acid."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle17"
-	initial_chem = "pacid"
+	chemname = "pacid"
 
 /obj/item/reagent_container/glass/bottle/adminordrazine
 	name = "\improper Adminordrazine bottle"
 	desc = "A small bottle. Contains the liquid essence of the gods."
 	icon = 'icons/obj/items/drinks.dmi'
 	icon_state = "holyflask"
-	initial_chem = "adminordrazine"
+	chemname = "adminordrazine"
 
 /obj/item/reagent_container/glass/bottle/capsaicin
 	name = "\improper Capsaicin bottle"
 	desc = "A small bottle. Contains hot sauce."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle3"
-	initial_chem = "capsaicin"
+	chemname = "capsaicin"
 
 /obj/item/reagent_container/glass/bottle/frostoil
 	name = "\improper Frost Oil bottle"
 	desc = "A small bottle. Contains cold sauce."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle17"
-	initial_chem = "frostoil"
+	chemname = "frostoil"
 
 /obj/item/reagent_container/glass/bottle/bicaridine
 	name = "\improper Bicaridine bottle"
@@ -332,7 +330,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle17"
 	amount_per_transfer_from_this = 60
-	initial_chem = "bicaridine"
+	chemname = "bicaridine"
 
 /obj/item/reagent_container/glass/bottle/peridaxon
 	name = "\improper Peridaxon bottle"
@@ -340,7 +338,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle4"
 	amount_per_transfer_from_this = 60
-	initial_chem = "peridaxon"
+	chemname = "peridaxon"
 
 /obj/item/reagent_container/glass/bottle/tramadol
 	name = "\improper Tramadol bottle"
@@ -348,7 +346,7 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle1"
 	amount_per_transfer_from_this = 60
-	initial_chem = "tramadol"
+	chemname = "tramadol"
 
 /obj/item/reagent_container/glass/bottle/tramadol/Initialize()
 	. = ..()
@@ -360,11 +358,11 @@
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle2"
 	amount_per_transfer_from_this = 60
-	initial_chem = "oxycodone"
+	chemname = "oxycodone"
 
 /obj/item/reagent_container/glass/bottle/tricordrazine
 	name = "\improper Tricordrazine bottle"
 	desc = "A small bottle. Contains tricordrazine - A weak but catch-all medicine for treating all sorts of damage."
 	icon = 'icons/obj/items/chemistry.dmi'
 	icon_state = "bottle18"
-	initial_chem = "tricordrazine"
+	chemname = "tricordrazine"
